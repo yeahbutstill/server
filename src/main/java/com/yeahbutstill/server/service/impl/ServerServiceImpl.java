@@ -6,6 +6,7 @@ import com.yeahbutstill.server.repo.ServerRepo;
 import com.yeahbutstill.server.service.ServerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -65,7 +66,7 @@ public class ServerServiceImpl implements ServerService {
     }
 
     @Override
-    public Server update(Server server) {
+    public Server update(@NotNull Server server) {
         log.info("Updating server: {}", server.getName());
         return serverRepo.save(server);
     }
@@ -77,7 +78,7 @@ public class ServerServiceImpl implements ServerService {
         return Boolean.TRUE;
     }
 
-    private String setServerImageUrl() {
+    private @NotNull String setServerImageUrl() {
         String[] imageNames = {
                 "server-1.png",
                 "server-2.png",

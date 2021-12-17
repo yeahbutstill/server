@@ -5,11 +5,15 @@ import com.yeahbutstill.server.model.Server;
 import com.yeahbutstill.server.service.impl.ServerServiceImpl;
 import com.yeahbutstill.server.util.Response;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -94,6 +98,14 @@ public class ServerController {
                         .statusCode(HttpStatus.OK.value())
                         .build()
         );
+
+    }
+
+    @SneakyThrows
+    @GetMapping(path = "/images/{fileName}", produces = MediaType.IMAGE_PNG_VALUE)
+    public byte[] getServerImage(@PathVariable("fileName") String fileName) {
+
+        return Files.readAllBytes(Paths.get(System.getProperty("classpath:images/" + fileName)));
 
     }
 
