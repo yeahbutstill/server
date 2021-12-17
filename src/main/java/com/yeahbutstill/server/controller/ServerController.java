@@ -7,11 +7,9 @@ import com.yeahbutstill.server.util.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -49,6 +47,21 @@ public class ServerController {
                         .message(server.getStatus().equals(Status.SERVER_UP) ? "Ping success" : "Ping failed")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
+                        .build()
+        );
+
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<Response> saveServer(@RequestBody @Valid Server server) {
+
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(LocalDateTime.now())
+                        .data(Map.of("server", serverService.create(server)))
+                        .message("Server created")
+                        .status(HttpStatus.CREATED)
+                        .statusCode(HttpStatus.CREATED.value())
                         .build()
         );
 
