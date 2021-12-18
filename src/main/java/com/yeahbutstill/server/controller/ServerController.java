@@ -5,17 +5,18 @@ import com.yeahbutstill.server.model.Server;
 import com.yeahbutstill.server.service.impl.ServerServiceImpl;
 import com.yeahbutstill.server.util.Response;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/server")
@@ -25,8 +26,9 @@ public class ServerController {
     private final ServerServiceImpl serverService;
 
     @GetMapping("/list")
-    public ResponseEntity<Response> getServers() {
+    public ResponseEntity<Response> getServers() throws InterruptedException {
 
+        TimeUnit.SECONDS.sleep(3);
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(LocalDateTime.now())
@@ -40,7 +42,7 @@ public class ServerController {
     }
 
     @GetMapping("/ping/{ipAddress}")
-    public ResponseEntity<Response> pingServer(@PathVariable("ipAddress") String ipAddress) {
+    public ResponseEntity<Response> pingServer(@PathVariable("ipAddress") String ipAddress) throws IOException {
 
         Server server = serverService.ping(ipAddress);
 
@@ -48,7 +50,7 @@ public class ServerController {
                 Response.builder()
                         .timeStamp(LocalDateTime.now())
                         .data(Map.of("server", server))
-                        .message(server.getStatus().equals(Status.SERVER_UP) ? "Ping success" : "Ping failed")
+                        .message(server.getStatus() == Status.SERVER_UP ? "Ping success" : "Ping failed")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
                         .build()
@@ -101,11 +103,10 @@ public class ServerController {
 
     }
 
-    @SneakyThrows
-    @GetMapping(path = "/images/{fileName}", produces = MediaType.IMAGE_PNG_VALUE)
-    public byte[] getServerImage(@PathVariable("fileName") String fileName) {
+    @GetMapping(path = "/image/{fileName}", produces = MediaType.IMAGE_PNG_VALUE)
+    public byte[] getServerImage(@PathVariable("fileName") String fileName) throws IOException {
 
-        return Files.readAllBytes(Paths.get(System.getProperty("classpath:images/" + fileName)));
+        return Files.readAllBytes(Paths.get(System.getProperty("user.home") + "/Downloads/images/" + fileName));
 
     }
 
