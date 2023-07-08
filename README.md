@@ -6,7 +6,7 @@ Back-End manajemen server
 
 * Run MySQL di docker
     ```bashpro shell script
-  sudo docker run --rm \
+  docker run --rm \
   --name=server-db \
   -e MYSQL_DATABASE=serverdb \
   -e MYSQL_USER=servermanager \
@@ -16,7 +16,7 @@ Back-End manajemen server
   -p 6603:3306 \
   -v "$PWD/docker/server-db/conf.d":/etc/mysql/conf.d \
   -v "$PWD/storage/docker/serverdb-data":/var/lib/mysql \
-  mysql
+  mysql:8
    ```
 
 * Login MySQL

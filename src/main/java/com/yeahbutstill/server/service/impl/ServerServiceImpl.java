@@ -4,14 +4,14 @@ import com.yeahbutstill.server.enumeration.Status;
 import com.yeahbutstill.server.model.Server;
 import com.yeahbutstill.server.repo.ServerRepo;
 import com.yeahbutstill.server.service.ServerService;
+import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.transaction.Transactional;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
