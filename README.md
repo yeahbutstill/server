@@ -2,8 +2,9 @@
 
 Back-End manajemen server
 
-## Setup Database
 
+## Setup Database
+Karena sudah ditambahkan dependency spring boot docker compose dan scopenya runtime. jadi setupnya ada di file docker compose.
 * Run MySQL di docker
     ```bashpro shell script
   docker run --rm \
