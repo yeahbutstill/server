@@ -3,10 +3,15 @@
 Back-End manajemen server
 
 
-## Setup Database
-Karena sudah ditambahkan dependency spring boot docker compose dan scopenya runtime. jadi setupnya ada di file docker compose.
+## Setup Database 
+Karena sudah ditambahkan dependency spring boot docker compose dan scopenya runtime. jadi setupnya ada di file docker compose ([compose.yaml](compose.yaml)).
+oh iya jangan lupa di skip test pas jalanin lewat terminal, kalau lewat idea langsung run aja
+```shell
+mvn clean install spring-boot:run -DskipTests
+```
+## Tanpa Docker Compose
 * Run MySQL di docker
-    ```bashpro shell script
+  ```bash
   docker run --rm \
   --name=server-db \
   -e MYSQL_DATABASE=serverdb \
@@ -17,8 +22,8 @@ Karena sudah ditambahkan dependency spring boot docker compose dan scopenya runt
   -p 6603:3306 \
   -v "$PWD/docker/server-db/conf.d":/etc/mysql/conf.d \
   -v "$PWD/storage/docker/serverdb-data":/var/lib/mysql \
-  mysql:8
-   ```
+  mysql:8.4
+  ```
 
 * Login MySQL
   ```shell

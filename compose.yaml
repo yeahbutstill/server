@@ -1,17 +1,17 @@
 services:
-  mysql:
-    image: 'mysql:8'
+  db:
+    image: mysql:8.4
+    restart: always
     environment:
-      - 'MYSQL_DATABASE=serverdb'
-      - 'MYSQL_PASSWORD=PNSJkxXvVNDAhePMuExTBuRR'
-      - 'MYSQL_ROOT_PASSWORD=PNSJkxXvVNDAhePMuExTBuRR'
-      - 'MYSQL_USER=servermanager'
-      - 'TZ=Asia/Jakarta'
+      MYSQL_DATABASE: serverdb
+      MYSQL_PASSWORD: PNSJkxXvVNDAhePMuExTBuRR
+      MYSQL_ROOT_PASSWORD: PNSJkxXvVNDAhePMuExTBuRR
+      MYSQL_USER: servermanager
+      TZ: Asia/Jakarta
     volumes:
-      - '$PWD/docker/server-db/conf.d":/etc/mysql/conf.d'
-      - '$PWD/storage/docker/serverdb-data":/var/lib/mysql'
-
+      - ./docker/server-db/conf.d:/etc/mysql/conf.d
+      - ./storage/docker/serverdb-data:/var/lib/mysql
     ports:
-      - '6603:3306'
+      - 6603:3306
     expose:
-      - '6603'
+      - 6603
