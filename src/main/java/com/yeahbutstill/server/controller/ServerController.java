@@ -2,7 +2,7 @@ package com.yeahbutstill.server.controller;
 
 import com.yeahbutstill.server.enumeration.Status;
 import com.yeahbutstill.server.model.Server;
-import com.yeahbutstill.server.service.impl.ServerServiceImpl;
+import com.yeahbutstill.server.service.ServerService;
 import com.yeahbutstill.server.util.Response;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class ServerController {
 
-    private final ServerServiceImpl serverService;
+    private final ServerService serverService;
 
     @GetMapping("/list")
     public ResponseEntity<Response> getServers() throws InterruptedException {
