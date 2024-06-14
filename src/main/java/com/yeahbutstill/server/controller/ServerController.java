@@ -2,7 +2,7 @@ package com.yeahbutstill.server.controller;
 
 import com.yeahbutstill.server.enumeration.Status;
 import com.yeahbutstill.server.model.Server;
-import com.yeahbutstill.server.service.ServerService;
+import com.yeahbutstill.server.service.impl.ServerServiceImpl;
 import com.yeahbutstill.server.util.Response;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class ServerController {
 
-    private final ServerService serverService;
+    private final ServerServiceImpl serverServiceImpl;
 
     @GetMapping("/list")
     public ResponseEntity<Response> getServers() throws InterruptedException {
@@ -32,7 +32,7 @@ public class ServerController {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(LocalDateTime.now())
-                        .data(Map.of("servers", serverService.list(10)))
+                        .data(Map.of("servers", serverServiceImpl.list(10)))
                         .message("Servers retrieved")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
@@ -44,7 +44,7 @@ public class ServerController {
     @GetMapping("/ping/{ipAddress}")
     public ResponseEntity<Response> pingServer(@PathVariable("ipAddress") String ipAddress) throws IOException {
 
-        Server server = serverService.ping(ipAddress);
+        Server server = serverServiceImpl.ping(ipAddress);
 
         return ResponseEntity.ok(
                 Response.builder()
@@ -64,7 +64,7 @@ public class ServerController {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(LocalDateTime.now())
-                        .data(Map.of("server", serverService.create(server)))
+                        .data(Map.of("server", serverServiceImpl.create(server)))
                         .message("Server created")
                         .status(HttpStatus.CREATED)
                         .statusCode(HttpStatus.CREATED.value())
@@ -79,7 +79,7 @@ public class ServerController {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(LocalDateTime.now())
-                        .data(Map.of("server", serverService.get(id)))
+                        .data(Map.of("server", serverServiceImpl.get(id)))
                         .message("Server retrieved")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
@@ -94,7 +94,7 @@ public class ServerController {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(LocalDateTime.now())
-                        .data(Map.of("deleted", serverService.delete(id)))
+                        .data(Map.of("deleted", serverServiceImpl.delete(id)))
                         .message("Server deleted")
                         .status(HttpStatus.OK)
                         .statusCode(HttpStatus.OK.value())
