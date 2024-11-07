@@ -12,6 +12,6 @@ services:
       - ./docker/server-db/conf.d:/etc/mysql/conf.d
       - ./storage/docker/serverdb-data:/var/lib/mysql
     ports:
-      - 6603:3306
+      - "6603:3306"
     expose:
       - 6603
