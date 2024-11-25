@@ -1,7 +1,7 @@
 package com.yeahbutstill.server.service.impl;
 
 import com.yeahbutstill.server.enumeration.Status;
-import com.yeahbutstill.server.model.Server;
+import com.yeahbutstill.server.entity.Server;
 import com.yeahbutstill.server.repo.ServerRepo;
 import com.yeahbutstill.server.service.ServerService;
 import jakarta.transaction.Transactional;

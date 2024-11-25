@@ -1,9 +1,9 @@
 package com.yeahbutstill.server.controller;
 
 import com.yeahbutstill.server.enumeration.Status;
-import com.yeahbutstill.server.model.Server;
+import com.yeahbutstill.server.entity.Server;
 import com.yeahbutstill.server.service.impl.ServerServiceImpl;
-import com.yeahbutstill.server.util.Response;
+import com.yeahbutstill.server.dto.ResponseDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,11 +26,11 @@ public class ServerController {
     private final ServerServiceImpl serverServiceImpl;
 
     @GetMapping("/list")
-    public ResponseEntity<Response> getServers() throws InterruptedException {
+    public ResponseEntity<ResponseDto> getServers() throws InterruptedException {
 
         TimeUnit.SECONDS.sleep(3);
         return ResponseEntity.ok(
-                Response.builder()
+                ResponseDto.builder()
                         .timeStamp(LocalDateTime.now())
                         .data(Map.of("servers", serverServiceImpl.list(10)))
                         .message("Servers retrieved")
@@ -42,12 +42,12 @@ public class ServerController {
     }
 
     @GetMapping("/ping/{ipAddress}")
-    public ResponseEntity<Response> pingServer(@PathVariable("ipAddress") String ipAddress) throws IOException {
+    public ResponseEntity<ResponseDto> pingServer(@PathVariable("ipAddress") String ipAddress) throws IOException {
 
         Server server = serverServiceImpl.ping(ipAddress);
 
         return ResponseEntity.ok(
-                Response.builder()
+                ResponseDto.builder()
                         .timeStamp(LocalDateTime.now())
                         .data(Map.of("server", server))
                         .message(server.getStatus() == Status.SERVER_UP ? "Ping success" : "Ping failed")
@@ -59,10 +59,10 @@ public class ServerController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Response> saveServer(@RequestBody @Valid Server server) {
+    public ResponseEntity<ResponseDto> saveServer(@RequestBody @Valid Server server) {
 
         return ResponseEntity.ok(
-                Response.builder()
+                ResponseDto.builder()
                         .timeStamp(LocalDateTime.now())
                         .data(Map.of("server", serverServiceImpl.create(server)))
                         .message("Server created")
@@ -74,10 +74,10 @@ public class ServerController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Response> getServer(@PathVariable("id") Long id) {
+    public ResponseEntity<ResponseDto> getServer(@PathVariable("id") Long id) {
 
         return ResponseEntity.ok(
-                Response.builder()
+                ResponseDto.builder()
                         .timeStamp(LocalDateTime.now())
                         .data(Map.of("server", serverServiceImpl.get(id)))
                         .message("Server retrieved")
@@ -89,10 +89,10 @@ public class ServerController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Response> deleteServer(@PathVariable("id") Long id) {
+    public ResponseEntity<ResponseDto> deleteServer(@PathVariable("id") Long id) {
 
         return ResponseEntity.ok(
-                Response.builder()
+                ResponseDto.builder()
                         .timeStamp(LocalDateTime.now())
                         .data(Map.of("deleted", serverServiceImpl.delete(id)))
                         .message("Server deleted")

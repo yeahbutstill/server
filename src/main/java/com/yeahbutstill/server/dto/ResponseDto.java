@@ -1,4 +1,4 @@
-package com.yeahbutstill.server.util;
+package com.yeahbutstill.server.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
@@ -11,7 +11,7 @@ import java.util.Map;
 @Data
 @SuperBuilder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Response {
+public class ResponseDto {
 
     protected LocalDateTime timeStamp;
     protected Integer statusCode;

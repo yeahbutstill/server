@@ -1,6 +1,6 @@
 package com.yeahbutstill.server.service;
 
-import com.yeahbutstill.server.model.Server;
+import com.yeahbutstill.server.entity.Server;
 
 import java.io.IOException;
 import java.util.Collection;

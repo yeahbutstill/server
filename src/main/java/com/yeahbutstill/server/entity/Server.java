@@ -1,4 +1,4 @@
-package com.yeahbutstill.server.model;
+package com.yeahbutstill.server.entity;
 
 import com.yeahbutstill.server.enumeration.Status;
 import jakarta.persistence.*;

@@ -1,7 +1,7 @@
 package com.yeahbutstill.server;
 
 import com.yeahbutstill.server.enumeration.Status;
-import com.yeahbutstill.server.model.Server;
+import com.yeahbutstill.server.entity.Server;
 import com.yeahbutstill.server.repo.ServerRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
