@@ -51,13 +51,12 @@ mvn clean install spring-boot:run -DskipTests
   ```mysql
   SHOW DATABASES; 
   ```
-  the output:
-  ```shell
-  +--------------------+
-  | Database           |
-  +--------------------+
-  | information_schema |
-  | invoicedb          |
-  +--------------------+
-  2 rows in set (0,00 sec) 
-  ```
+
+## Dengan Docker Compose
+```shell
+docker compose up
+```
+setelah itu 
+```shell
+mvn clean install spring-boot:run
+```
