@@ -1,22 +1,19 @@
 package com.yeahbutstill.server.service;
 
 import com.yeahbutstill.server.entity.Server;
-
-import java.io.IOException;
 import java.util.Collection;
 
 public interface ServerService {
 
-    Server create(Server server);
+  Server create(Server server);
 
-    Server ping(String ipAddress) throws IOException;
+  Server ping(String ipAddress);
 
-    Collection<Server> list(int limit);
+  Collection<Server> list(int limit);
 
-    Server get(Long id);
+  Server get(Long id);
 
-    Server update(Server server);
+  Server update(Server server);
 
-    Boolean delete(Long id);
-
+  Boolean delete(Long id);
 }

@@ -1,16 +1,15 @@
 package com.yeahbutstill.server.enumeration;
 
+import lombok.Getter;
+
+@Getter
 public enum Status {
-    SERVER_UP("SERVER_UP"),
-    SERVER_DOWN("SERVER_DOWN");
+  SERVER_UP("SERVER_UP"),
+  SERVER_DOWN("SERVER_DOWN");
 
-    private final String status;
+  private final String current;
 
-    Status(String status) {
-        this.status = status;
-    }
-
-    public String getStatus() {
-        return status;
-    }
+  Status(String current) {
+    this.current = current;
+  }
 }
